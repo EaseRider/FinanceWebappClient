@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import {CoreModule} from "./core/core.module";
 import {WelcomeModule} from "./welcome/welcome.module";
+import {DashboardModule} from "./dashboard/dashboard.module";
 
 import {AppComponent} from './app.component';
 
@@ -24,6 +25,7 @@ import {AuthModule} from "./auth/auth.module";
     CoreModule.forRoot(),
     AuthModule.forRoot(),
     WelcomeModule.forRoot(),
+    DashboardModule.forRoot(),
 
     AppRoutingModule
   ],
