@@ -10,7 +10,7 @@
 // hue.
 $candy-app-primary: mat-palette($mat-indigo);
 //$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
-$candy-app-accent:  mat-palette($mat-cyan, A200, A100, A400);
+$candy-app-accent:  mat-palette($mat-orange);//, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $candy-app-warn:    mat-palette($mat-red);
@@ -23,3 +23,15 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 // that you are using.
 @include angular-material-theme($candy-app-theme);
 
+// reset
+body {
+  padding: 0;
+  margin: 0;
+}
+
+md-card {
+  margin: 2%!important;
+}
+.fill-remaining-space{
+  flex: 1 1 auto;
+}

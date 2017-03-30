@@ -1,18 +1,12 @@
 <!-- TODO: Add ng2 specific directives/validation settings and add styling -->
-<form #f="ngForm" (ngSubmit)="doLogin(f)">
-  <div>
-    User name:
-    <div>
-      <input pattern=".{3,}" placeholder="User" type="text" name="login" ngModel required />
-      <div>Please specify your login, at least three characters.</div>
-    </div>
-  </div>
-  <div>
-    Password:
-    <div>
-      <input pattern=".{3,}" placeholder="Password" type="password" name="password" ngModel required />
-      <div>Please specify your login, at least three characters.</div>
-    </div>
-  </div>
-  <button md-button>Login</button>
+ <form #f="ngForm" name="loginForm" (ngSubmit)="doLogin(f)">
+    <md-input-container>
+        <input mdInput pattern=".{3,}" placeholder="User" type="text" name="login" #loginnn ngModel required />
+    </md-input-container><br><br><br>
+    <div>Please specify your login, at least three characters.</div>
+    <md-input-container>
+        <input mdInput pattern=".{3,}" placeholder="Password" type="password" name="password" ngModel required/>
+    </md-input-container>
+    <div>Please specify your login, at least three characters.</div>
+    <button md-raised-button color="primary">Login</button>
 </form>

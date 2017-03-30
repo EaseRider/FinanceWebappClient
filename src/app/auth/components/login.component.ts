@@ -48,4 +48,9 @@ export class LoginComponent implements OnInit {
     }
     return false;
   }
+
+
+  log(val) { console.log("logEntry: ",val);
+  console.log(this);}
+
 }
