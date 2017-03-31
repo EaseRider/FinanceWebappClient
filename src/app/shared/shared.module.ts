@@ -1,7 +1,6 @@
 import {NgModule, ModuleWithProviders} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
-import {MaterialModule} from "@angular/material";
 
 @NgModule({
     declarations: [
@@ -11,7 +10,7 @@ import {MaterialModule} from "@angular/material";
         CommonModule
     ],
     exports: [
-        CommonModule, FormsModule, MaterialModule
+        CommonModule, FormsModule
         // TODO: Add declarations here, if additional components are placed within the shared module
     ],
     providers: []

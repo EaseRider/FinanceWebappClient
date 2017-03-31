@@ -1,6 +1,14 @@
-<md-toolbar color="primary" layout="row" class="md-toolbar-tools">
-    <span>Finance App</span>
-    <span class="fill-remaining-space"></span>
-    <span>Logout</span>
-</md-toolbar>
-<router-outlet></router-outlet>
+<div class="ui secondary pointing menu" color="primary" layout="row">
+  <div class="item">Finance App</div>
+  <a class="item active" routerLink="/welcome" href="">Login</a>
+  <a class="ui item" routerLink="/welcome/register">Registration</a>
+  <div class="right menu">
+    <div class="item">
+      <wed-logout></wed-logout>
+    </div>
+  </div>
+</div>
+<div class="ui segment">
+  <router-outlet></router-outlet>
+</div>
+
