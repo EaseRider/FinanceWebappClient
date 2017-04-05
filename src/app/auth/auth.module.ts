@@ -26,6 +26,9 @@ import {SharedModule} from "../shared/shared.module";
     providers: []
 })
 export class AuthModule {
+  constructor() {
+    console.log("AuthModule");
+  }
     static forRoot(config?: {}): ModuleWithProviders {
 
         return {

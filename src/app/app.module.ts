@@ -11,16 +11,19 @@ import {AppComponent} from './app.component';
 
 import {AppRoutingModule} from "./app-routing.module";
 import {AuthModule} from "./auth/auth.module";
+import {NavigationPipe, FilterPipe} from "./navigation.pipe";
+import {SharedModule} from "./shared/shared.module";
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, NavigationPipe, FilterPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    SharedModule,
 
     CoreModule.forRoot(),
     AuthModule.forRoot(),

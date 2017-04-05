@@ -1,4 +1,5 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation, Pipe, PipeTransform} from '@angular/core';
+import {Router, NavigationEnd} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,20 @@ import {Component, ViewEncapsulation} from '@angular/core';
   styleUrls: ['app.component.scss', '../semantic/semantic.min.css']
 })
 export class AppComponent {
+  private currUrl: string = '';
+  private navigation: any[] = [
+    {main: 'welcome', url: '/welcome', name: 'Login'},
+    {main: 'welcome', url: '/welcome/register', name: 'Registration'},
+    {main: 'dashboard', url: '/dashboard', name: 'Home'},
+    {main: 'dashboard', url: '/dashboard/transactions', name: 'Account Transactions'},
+  ];
+
+  constructor(private router: Router) {
+    router.events.subscribe(router => {
+      if (router instanceof NavigationEnd) {
+        this.currUrl = router.url;
+      }
+    }, (err) => console.log('ErrorRouter', err), () => console.log('FinishedRouter!!'));
+  }
 
 }

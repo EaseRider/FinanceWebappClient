@@ -1,0 +1,23 @@
+<h2>
+  All Transactions
+</h2>
+<table class="ui celled table">
+  <thead>
+  <tr>
+    <th><span>Source</span></th>
+    <th><span>Target</span></th>
+    <th>Amount [CHF]</th>
+    <th>Balance [CHF]</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let tr of transactions">
+    <td>{{tr.from}}</td>
+    <td>{{tr.target}}</td>
+    <td>{{tr.amount}}</td>
+    <td>{{tr.amount}}</td>
+  </tr>
+  </tbody>
+</table>
+Table with last 3 transactions: Source, Target, Amount[CHF], Balance [CHF]
+<button>All Transactions</button>
