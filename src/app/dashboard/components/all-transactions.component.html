@@ -4,6 +4,7 @@
 <table class="ui celled table">
   <thead>
   <tr>
+    <th><span>Date</span></th>
     <th><span>Source</span></th>
     <th><span>Target</span></th>
     <th>Amount [CHF]</th>
@@ -12,10 +13,11 @@
   </thead>
   <tbody>
   <tr *ngFor="let tr of transactions">
+    <td>{{tr.date}}</td>
     <td>{{tr.from}}</td>
     <td>{{tr.target}}</td>
     <td>{{tr.amount}}</td>
-    <td>{{tr.amount}}</td>
+    <td>{{tr.total}}</td>
   </tr>
   </tbody>
 </table>
