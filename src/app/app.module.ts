@@ -13,6 +13,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {AuthModule} from "./auth/auth.module";
 import {NavigationPipe, FilterPipe} from "./navigation.pipe";
 import {SharedModule} from "./shared/shared.module";
+import {NgSemanticModule} from "ng-semantic/ng-semantic";
 
 
 @NgModule({
@@ -24,6 +25,8 @@ import {SharedModule} from "./shared/shared.module";
     FormsModule,
     HttpModule,
     SharedModule,
+
+    NgSemanticModule,
 
     CoreModule.forRoot(),
     AuthModule.forRoot(),

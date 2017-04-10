@@ -4,10 +4,10 @@ import {Router, NavigationEnd} from "@angular/router";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['app.component.scss', '../semantic/semantic.min.css']
+  styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  private currUrl: string = '';
+  private currUrl: string = '/welcome';
   private navigation: any[] = [
     {main: 'welcome', url: '/welcome', name: 'Login'},
     {main: 'welcome', url: '/welcome/register', name: 'Registration'},
