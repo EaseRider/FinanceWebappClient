@@ -5,12 +5,14 @@ import {DashboardResourceService} from "../resources/dashboard-resource.service"
 import {QueryInformation} from "../models/query-information";
 
 @Injectable()
-export class TransactionHistoryService {
+export class TransactionService {
   constructor(private resource: DashboardResourceService) {
   }
 
   public lastTransactionChange: EventEmitter<Transaction[]> = new EventEmitter<Transaction[]>();
   public filteredTransactionChange: EventEmitter<Transaction[]> = new EventEmitter<Transaction[]>();
+
+  public transferChangeEvent: EventEmitter<Transaction> = new EventEmitter<Transaction>();
 
   private lastTransactions: Transaction[] = [];
   private filteredTransactions: Transaction[] = [];
@@ -28,8 +30,14 @@ export class TransactionHistoryService {
         this.lastTransactions = !isBlank(data) ? data : null;
         this.lastTransactionChange.emit(this.lastTransactions);
       });
+  }
 
-
+  public createTransfer(trans: Transaction) {
+    this.resource.createTransfer(trans).subscribe(
+      (res: Transaction) => {
+        this.transferChangeEvent.emit(res);
+      }
+    );
   }
 
 

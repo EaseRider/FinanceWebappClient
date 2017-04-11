@@ -9,20 +9,19 @@ import {LoginInfo} from "../models";
 
 @Component({
   selector: 'wed-login',
-  templateUrl: 'login.component.html',
-  styleUrls: ['login.component.scss']
+  templateUrl: 'login.component.html'
 })
 export class LoginComponent implements OnInit {
 
   private backUrl;
 
-  public login:string;
-  public password:string;
+  public login: string;
+  public password: string;
 
-  public isProcessing:boolean = false;
+  public isProcessing: boolean = false;
 
-  constructor(private autSvc:AuthService, private navigationSvc: NavigationService, route: ActivatedRoute) {
-    route.params.subscribe((p:Params) => this.backUrl = p["backUrl"]);
+  constructor(private autSvc: AuthService, private navigationSvc: NavigationService, route: ActivatedRoute) {
+    route.params.subscribe((p: Params) => this.backUrl = p["backUrl"]);
   }
 
   ngOnInit() {
@@ -40,7 +39,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  public doLogin(f: NgForm):boolean {
+  public doLogin(f: NgForm): boolean {
     console.log("Halo welt", f);
     if (f.valid) {
       this.isProcessing = true;
@@ -50,7 +49,9 @@ export class LoginComponent implements OnInit {
   }
 
 
-  log(val) { console.log("logEntry: ",val);
-  console.log(this);}
+  log(val) {
+    console.log("logEntry: ", val);
+    console.log(this);
+  }
 
 }

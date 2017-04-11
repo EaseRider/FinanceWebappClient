@@ -7,8 +7,7 @@ import {Account} from "../models";
 
 @ Component({
   selector: 'wed-logout',
-  templateUrl: 'logout.component.html',
-  styleUrls: ['logout.component.scss']
+  templateUrl: 'logout.component.html'
 })
 export class LogoutComponent implements OnInit {
 

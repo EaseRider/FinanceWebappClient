@@ -32,17 +32,17 @@ export class DashboardResourceService extends ResourceBase {
       });
   }
 
-  public createTransfer(trans: Transaction) {
-    return this.post(`/accounts/transactions`, trans)
+  public createTransfer(trans: Transaction): Observable<Transaction> {
+    return this.post(`/accounts/transactions`, {target: trans.target, amount: trans.amount})
       .map((response: Response) => {
         let result = response.json();
         if (result) {
-          return true;
+          return Transaction.fromDto(result);
         }
-        return null;
+        return false;
       })
       .catch((error: any) => {
-        return Observable.of<Transaction[]>([]);
+        return Observable.of<Transaction>(null);
       });
   }
 

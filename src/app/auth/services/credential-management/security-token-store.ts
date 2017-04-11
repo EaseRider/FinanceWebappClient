@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import {Account} from "../../models/account";
+import {AccountInfo} from "../../models/account-info";
 
 /**
  * TODO: Add localStorage logic here...
@@ -14,11 +16,9 @@ export class SecurityTokenStore {
     if (!this.token) {
 
       const token = sessionStorage.getItem('token');
-      const owner = sessionStorage.getItem('owner');
-      if (token && owner) {
+      if (token) {
         this.token = {
-          token: token,
-          owner: owner,
+          token: token
         };
       }
     }
@@ -27,12 +27,10 @@ export class SecurityTokenStore {
 
   public set storedValue(value: SecurityToken) {
     sessionStorage.setItem('token', value.token);
-    sessionStorage.setItem('owner', value.owner);
     this.token = value;
   }
 }
 
 export interface SecurityToken {
-  token: string,
-  owner: any
+  token: string
 }

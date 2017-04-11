@@ -7,7 +7,7 @@ import {DashboardComponent} from './components/dashboard.component';
 import {NewPaymentComponent} from './components/new-payment.component';
 import {LatestTransactionsComponent} from './components/latest-transactions.component';
 import {AllTransactionsComponent} from "./components/all-transactions.component";
-import {TransactionHistoryService} from "./services/transactionhistory.service";
+import {TransactionService} from "./services/transaction.service";
 import {DashboardResourceService} from "./resources/dashboard-resource.service";
 
 @NgModule({
@@ -33,7 +33,7 @@ export class DashboardModule {
     return {
       ngModule: DashboardModule,
       providers: [
-        TransactionHistoryService,
+        TransactionService,
         DashboardResourceService]
     };
   }

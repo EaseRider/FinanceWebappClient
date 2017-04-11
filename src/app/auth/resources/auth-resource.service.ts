@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 
 import {LoginInfo, Account, RegistrationInfo, Credential} from "../models";
 import {ResourceBase} from "./resource-base";
+import {AccountInfo} from "../models/account-info";
 
 @Injectable()
 export class AuthResourceService extends ResourceBase {
@@ -38,5 +39,17 @@ export class AuthResourceService extends ResourceBase {
       .catch((error:any) => {
         return Observable.of<Credential>(null);
       });
+  }
+
+  public getAccountInfo(): Observable<AccountInfo> {
+    return this.get('/accounts/').map(
+      (response: Response) => {
+        let result = response.json();
+        if (result) {
+          return AccountInfo.fromDto(result);
+        }
+        return null;
+      }
+    );
   }
 }

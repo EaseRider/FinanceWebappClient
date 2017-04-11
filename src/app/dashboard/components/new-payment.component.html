@@ -6,15 +6,15 @@
     <form #f="ngForm" (ngSubmit)="doPayment(f)" class="ui form">
       <div class="field">
         <label for="from">From:</label>
-        <input type="text" id="from" name="from" value="{{accInfo?.accountNr}} [{{accInfo?.amount}}]" readonly>
+        <input type="text" id="from" name="from" value="{{accInfo?.accountNr}} [{{transaction?.total}}]" readonly>
       </div>
       <div class="field">
         <label for="to">To:</label>
-        <input pattern="[\d]{7}" type="text" id="to" name="to" placeholder="Target Account Number">
+        <input pattern="[\d]{7}" type="text" id="to" name="to" [(ngModel)]="transaction.target" placeholder="Target Account Number">
       </div>
       <div class="amount">
         <label for="from">Amount[CHF]:</label>
-        <input pattern="[\d]{7}" type="text" id="amount" name="amount" placeholder="Target Account Number">
+        <input pattern="[\d]+" type="text" id="amount" name="amount" [(ngModel)]="transaction.amount" placeholder="Target Account Number">
       </div>
       <button class="ui primary button">Pay</button>
 
