@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Transaction} from "../models/transaction";
 import {ConsolePipe} from "../../shared/console.pipe";
+import {TransactionHistoryService} from "../services/transactionhistory.service";
 
 @Component({
   selector: 'app-latest-transactions',
@@ -8,11 +9,17 @@ import {ConsolePipe} from "../../shared/console.pipe";
 })
 export class LatestTransactionsComponent implements OnInit {
   private transactions: Transaction[] = [];
-  constructor() { }
 
-  ngOnInit() {
+  constructor(private service: TransactionHistoryService) {
   }
 
+  ngOnInit() {
+    this.service.lastTransactionChange.subscribe(
+      (transactions: Transaction[]) => {
+        this.transactions = transactions;
+      });
+    this.service.updateLatestTransactions();
+  }
 }
 
 

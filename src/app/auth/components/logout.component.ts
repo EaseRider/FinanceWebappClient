@@ -5,7 +5,7 @@ import {NavigationService} from "../../core/services/navigation.service";
 import {AuthService} from "../services";
 import {Account} from "../models";
 
-@Component({
+@ Component({
   selector: 'wed-logout',
   templateUrl: 'logout.component.html',
   styleUrls: ['logout.component.scss']

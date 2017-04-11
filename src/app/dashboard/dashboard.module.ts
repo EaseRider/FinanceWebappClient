@@ -4,9 +4,11 @@ import {SharedModule} from "../shared/shared.module";
 
 import {DashbaordRoutingModule} from "./dashboard-routing.module";
 import {DashboardComponent} from './components/dashboard.component';
-import { NewPaymentComponent } from './components/new-payment.component';
-import { LatestTransactionsComponent } from './components/latest-transactions.component';
+import {NewPaymentComponent} from './components/new-payment.component';
+import {LatestTransactionsComponent} from './components/latest-transactions.component';
 import {AllTransactionsComponent} from "./components/all-transactions.component";
+import {TransactionHistoryService} from "./services/transactionhistory.service";
+import {DashboardResourceService} from "./resources/dashboard-resource.service";
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ export class DashboardModule {
   static forRoot(config?: {}): ModuleWithProviders {
     return {
       ngModule: DashboardModule,
-      providers: []
+      providers: [
+        TransactionHistoryService,
+        DashboardResourceService]
     };
   }
 
