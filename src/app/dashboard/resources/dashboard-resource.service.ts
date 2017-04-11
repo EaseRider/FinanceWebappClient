@@ -18,7 +18,7 @@ export class DashboardResourceService extends ResourceBase {
     super(http);
   }
 
-  public getTransactions(req: QueryInformation, token: string): Observable<Transaction[]> {
+  public getTransactions(req: QueryInformation): Observable<Transaction[]> {
     return this.get(`/accounts/transactions?fromDate=${req.fromDate}&toDate=${req.toDate}&count=${req.count}&skip=${req.skip}`)
       .map((response: Response) => {
         let result = response.json().result;
@@ -32,7 +32,30 @@ export class DashboardResourceService extends ResourceBase {
       });
   }
 
+  public createTransfer(trans: Transaction) {
+    return this.post(`/accounts/transactions`, trans)
+      .map((response: Response) => {
+        let result = response.json();
+        if (result) {
+          return true;
+        }
+        return null;
+      })
+      .catch((error: any) => {
+        return Observable.of<Transaction[]>([]);
+      });
+  }
+
   /*
+
+   export function transfer(
+   target: AccountNr,
+   amount: number,
+   token: string,
+   ): Promise<TransferResult> {
+   return postAuthenticatedJson('/accounts/transactions', token, {target, amount}).then(parseJSON)
+   }
+
    export function getTransactions(
    token: string,
    fromDate: string = "",

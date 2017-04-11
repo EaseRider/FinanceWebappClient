@@ -23,7 +23,7 @@ export class TransactionHistoryService {
     var query: QueryInformation = new QueryInformation(0, 3,
       0, '1999-05-11T02:00:00.000Z', (new Date()).toISOString()
     );
-    this.resource.getTransactions(query, '').subscribe(
+    this.resource.getTransactions(query).subscribe(
       (data: Transaction[]) => {
         this.lastTransactions = !isBlank(data) ? data : null;
         this.lastTransactionChange.emit(this.lastTransactions);
