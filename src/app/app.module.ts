@@ -31,7 +31,7 @@ import {NgSemanticModule} from "ng-semantic/ng-semantic";
     CoreModule.forRoot(),
     AuthModule.forRoot(),
     WelcomeModule.forRoot(),
-    DashboardModule.forRoot(),
+    //DashboardModule.forRoot(),
 
     AppRoutingModule
   ],

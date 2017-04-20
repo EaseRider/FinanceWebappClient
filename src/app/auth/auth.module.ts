@@ -2,7 +2,7 @@ import {NgModule, ModuleWithProviders} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {RequestOptions} from "@angular/http";
 
-import {AuthService, SecurityTokenStore} from "./services";
+import {AuthService, SecurityTokenStore, AuthGuard} from "./services";
 import {AuthResourceService, AuthRequestOptions} from "./resources";
 
 import {
@@ -40,6 +40,7 @@ export class AuthModule {
                 AuthResourceService,
                 AuthService,
                 SecurityTokenStore,
+                AuthGuard,
                 {
                     provide: RequestOptions,
                     useFactory: AuthRequestOptions.createFromTokenStore,

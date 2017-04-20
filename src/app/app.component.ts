@@ -17,10 +17,11 @@ export class AppComponent {
 
   constructor(private router: Router) {
     router.events.subscribe(router => {
+      console.log("route Event", router);
       if (router instanceof NavigationEnd) {
-        this.currUrl = router.url;
+        this.currUrl = router.urlAfterRedirects;
       }
-    }, (err) => console.log('ErrorRouter', err), () => console.log('FinishedRouter!!'));
+    }, (err) => console.log('ErrorRouter', err), () => console.log('FinishedRouter'));
   }
 
 }

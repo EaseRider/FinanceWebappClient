@@ -55,18 +55,22 @@ export class AuthService {
   }
 
   public updateAccountInfo(): void {
-    this.resource.getAccountInfo().subscribe(
-      (acc: AccountInfo) => {
-        if (acc) {
-          this.authUser = acc.owner;
-          this.account = acc;
-        } else {
-          this.authUser = null;
-          this.account = null;
+    if (this.tokenStore.storedValue) {
+      this.resource.getAccountInfo().subscribe(
+        (acc: AccountInfo) => {
+          if (acc) {
+            this.authUser = acc.owner;
+            this.account = acc;
+          } else {
+            this.authUser = null;
+            this.account = null;
+          }
+          this.authenticatedUserChange.emit(this.authUser);
+          this.accountInfoChanged.emit(this.account);
         }
-        this.authenticatedUserChange.emit(this.authUser);
-        this.accountInfoChanged.emit(this.account);
-      }
-    );
+      );
+    } else {
+      this.authenticatedUserChange.emit(null);
+    }
   }
 }

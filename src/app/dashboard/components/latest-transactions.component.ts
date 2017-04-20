@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Transaction} from "../models/transaction";
 import {ConsolePipe} from "../../shared/console.pipe";
 import {TransactionService} from "../services/transaction.service";
+import {NavigationService} from "../../core/services/navigation.service";
 
 @Component({
   selector: 'app-latest-transactions',
@@ -10,7 +11,7 @@ import {TransactionService} from "../services/transaction.service";
 export class LatestTransactionsComponent implements OnInit {
   private transactions: Transaction[] = [];
 
-  constructor(private service: TransactionService) {
+  constructor(private service: TransactionService, private navSrvc: NavigationService) {
   }
 
   ngOnInit() {
@@ -19,6 +20,10 @@ export class LatestTransactionsComponent implements OnInit {
         this.transactions = transactions;
       });
     this.service.updateLatestTransactions();
+  }
+
+  public goToAllTransaction() {
+    this.navSrvc.goToAllTransactions();
   }
 }
 

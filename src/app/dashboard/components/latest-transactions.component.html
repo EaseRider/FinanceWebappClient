@@ -1,4 +1,4 @@
-<div class="ui card">
+<div class="ui card fluid">
   <div class="content">
     <h2>
       Latest Transactions
@@ -14,13 +14,13 @@
       </thead>
       <tbody>
       <tr *ngFor="let tr of transactions">
-        <td>{{tr.from}}</td>
+        <td><strong>{{tr.from}}</strong></td>
         <td>{{tr.target}}</td>
-        <td>{{tr.amount}}</td>
-        <td>{{tr.total}}</td>
+        <td class="right aligned">{{tr.amount | number:'1.2-2'}}</td>
+        <td class="right aligned">{{tr.total | number:'1.2-2'}}</td>
       </tr>
       </tbody>
     </table>
-    <button>All Transactions</button>
+    <button class="ui primary button" (click)="goToAllTransaction()">All Transactions</button>
   </div>
 </div>

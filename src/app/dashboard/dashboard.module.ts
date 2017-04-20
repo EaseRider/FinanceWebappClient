@@ -9,6 +9,7 @@ import {LatestTransactionsComponent} from './components/latest-transactions.comp
 import {AllTransactionsComponent} from "./components/all-transactions.component";
 import {TransactionService} from "./services/transaction.service";
 import {DashboardResourceService} from "./resources/dashboard-resource.service";
+import {MyCurrencyPipe} from "./pipes/currency.pipe";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {DashboardResourceService} from "./resources/dashboard-resource.service";
     DashboardComponent,
     NewPaymentComponent,
     LatestTransactionsComponent,
-    AllTransactionsComponent],
+    AllTransactionsComponent,
+    MyCurrencyPipe],
   imports: [
     // Other Modules to import (imports the exported Components/Directives from the other module)
     SharedModule, DashbaordRoutingModule
@@ -25,6 +27,7 @@ import {DashboardResourceService} from "./resources/dashboard-resource.service";
     // Components/Directives (or even Modules) to export (available for other modules; and forRoot() )
   ],
   providers: [
+    TransactionService, DashboardResourceService
     // DI Providers (Services, Tokens, Factories...), may be instantiated multiple times
   ]
 })
@@ -32,9 +35,7 @@ export class DashboardModule {
   static forRoot(config?: {}): ModuleWithProviders {
     return {
       ngModule: DashboardModule,
-      providers: [
-        TransactionService,
-        DashboardResourceService]
+      providers: []
     };
   }
 

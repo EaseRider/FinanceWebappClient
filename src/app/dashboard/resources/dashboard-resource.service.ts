@@ -19,7 +19,8 @@ export class DashboardResourceService extends ResourceBase {
   }
 
   public getTransactions(req: QueryInformation): Observable<Transaction[]> {
-    return this.get(`/accounts/transactions?fromDate=${req.fromDate}&toDate=${req.toDate}&count=${req.count}&skip=${req.skip}`)
+    req = req.forRequest();
+    return this.get(`/accounts/transactions?fromDate=${req.fromDateJSON}&toDate=${req.toDateJSON}&count=${req.count}&skip=${req.skip}`)
       .map((response: Response) => {
         let result = response.json().result;
         if (result) {

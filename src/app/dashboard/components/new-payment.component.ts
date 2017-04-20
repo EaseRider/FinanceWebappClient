@@ -25,6 +25,7 @@ export class NewPaymentComponent implements OnInit {
         this.transaction.total = acc.amount;
       }
     );
+    this.authServ.updateAccountInfo();
     this.service.transferChangeEvent.subscribe(
       (res: Transaction) => {
         this.service.updateLatestTransactions();

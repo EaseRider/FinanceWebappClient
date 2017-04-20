@@ -23,7 +23,7 @@ export class TransactionService {
 
   public updateLatestTransactions() {
     var query: QueryInformation = new QueryInformation(0, 3,
-      0, '1999-05-11T02:00:00.000Z', (new Date()).toISOString()
+      0, null, '1999-05-11T02:00:00.000Z', null, (new Date()).toISOString()
     );
     this.resource.getTransactions(query).subscribe(
       (data: Transaction[]) => {
@@ -36,6 +36,15 @@ export class TransactionService {
     this.resource.createTransfer(trans).subscribe(
       (res: Transaction) => {
         this.transferChangeEvent.emit(res);
+      }
+    );
+  }
+
+  public getFilteredTransactions(query: QueryInformation) {
+    this.resource.getTransactions(query).subscribe(
+      (data: Transaction[]) => {
+        this.filteredTransactions = !isBlank(data) ? data : null;
+        this.filteredTransactionChange.emit(this.filteredTransactions);
       }
     );
   }

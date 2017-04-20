@@ -21,13 +21,12 @@ export class LogoutComponent implements OnInit {
     this.autSvc.authenticatedUserChange.subscribe(
       (credentials) => {
         this.user = credentials;
-        if (!credentials) {
-          this.navigationSvc.goToHome();
-        }
       });
+    this.autSvc.updateAccountInfo();
   }
 
   public doLogout() {
     this.autSvc.logout();
+    this.navigationSvc.goToHome();
   }
 }

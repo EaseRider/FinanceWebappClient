@@ -26,7 +26,7 @@ export class SecurityTokenStore {
   }
 
   public set storedValue(value: SecurityToken) {
-    sessionStorage.setItem('token', value.token);
+    sessionStorage.setItem('token', value === null ? '' : value.token);
     this.token = value;
   }
 }
