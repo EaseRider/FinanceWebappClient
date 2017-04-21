@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
       (credentials) => {
         this.isProcessing = false;
         if (credentials) {
-          this.navigationSvc.goToDashboard();
+          //this.navigationSvc.goToDashboard();
         }
       });
   }

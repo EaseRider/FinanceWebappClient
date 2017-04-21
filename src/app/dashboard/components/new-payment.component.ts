@@ -14,6 +14,11 @@ export class NewPaymentComponent implements OnInit {
 
   private accInfo: AccountInfo;
   private transaction: Transaction;
+  private showForm: boolean = true;
+  private hasError: boolean = false;
+  private lastTransaction: Transaction;
+
+  private test: any = {bla: 'wurst'};
 
   constructor(private service: TransactionService, private authServ: AuthService) {
   }
@@ -28,21 +33,27 @@ export class NewPaymentComponent implements OnInit {
     this.authServ.updateAccountInfo();
     this.service.transferChangeEvent.subscribe(
       (res: Transaction) => {
-        this.service.updateLatestTransactions();
-        this.transaction.total = res.total;
-        this.transaction.target = '';
-        this.transaction.amount = null;
-        console.log('Result of Transaction:', res)
+        if (res) {
+          this.lastTransaction = res;
+          this.service.updateLatestTransactions();
+          this.transaction.total = res.total;
+          this.transaction.target = '';
+          this.transaction.amount = null;
+        } else {
+          this.lastTransaction = null;
+        }
       }
     );
     this.transaction = new Transaction('', '', null, null, new Date());
   }
 
   public doPayment(f: NgForm): boolean {
-    console.log("Making Payment", f);
     if (f.valid) {
       this.service.createTransfer(this.transaction);
     }
+    f.resetForm();
     return false;
   }
+
+
 }

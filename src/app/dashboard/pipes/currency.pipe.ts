@@ -8,7 +8,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MyCurrencyPipe implements PipeTransform {
   transform(value: any): string {
-    console.log(value);
     return value + ' CHF';
   }
 }

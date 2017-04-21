@@ -11,6 +11,8 @@ import {TransactionService} from "./services/transaction.service";
 import {DashboardResourceService} from "./resources/dashboard-resource.service";
 import {MyCurrencyPipe} from "./pipes/currency.pipe";
 
+import {NgSemanticModule} from "ng-semantic/ng-semantic";
+
 @NgModule({
   declarations: [
     // Declarations (Components / Directives) used from/within the Module
@@ -21,7 +23,8 @@ import {MyCurrencyPipe} from "./pipes/currency.pipe";
     MyCurrencyPipe],
   imports: [
     // Other Modules to import (imports the exported Components/Directives from the other module)
-    SharedModule, DashbaordRoutingModule
+    SharedModule, DashbaordRoutingModule,
+    NgSemanticModule
   ],
   exports: [
     // Components/Directives (or even Modules) to export (available for other modules; and forRoot() )

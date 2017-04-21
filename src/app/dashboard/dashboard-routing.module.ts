@@ -12,8 +12,6 @@ const appRoutes: Routes = [
     children: [
       // TODO: Add routing path for dashboard here...
     ],
-    canActivate: ['checkActivation'],
-    canActivateChild: ['checkActivation'],
   },
   {path: 'transactions', component: AllTransactionsComponent}
   //{path: 'dashboard/transactions', component: AllTransactionsComponent}
@@ -31,8 +29,6 @@ const appRoutes: Routes = [
     {
       provide: 'checkActivation',
       useValue: (route: any, state: any) => {
-        // This would be called, but Router is quite shitty.
-        console.log('Hallo Is Called From Can Activate this fucking route!', route, state);
         return true;
       }
     }

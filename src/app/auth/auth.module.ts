@@ -6,46 +6,48 @@ import {AuthService, SecurityTokenStore, AuthGuard} from "./services";
 import {AuthResourceService, AuthRequestOptions} from "./resources";
 
 import {
-    LoginComponent, LogoutComponent,
-    RegisterComponent
+  LoginComponent, LogoutComponent,
+  RegisterComponent
 } from "./components";
 import {SharedModule} from "../shared/shared.module";
+import {AuthGuardLogin} from "./services/authguard-login.service";
 
 @NgModule({
-    declarations: [
-        // TODO: Add declarations here, if additional components are placed within the Auth module
-        LoginComponent, LogoutComponent, RegisterComponent
-    ],
-    imports: [
-        SharedModule
-    ],
-    exports: [
-        // TODO: Add declarations here, if additional components are placed within the Auth module
-        LoginComponent, LogoutComponent, RegisterComponent
-    ],
-    providers: []
+  declarations: [
+    // TODO: Add declarations here, if additional components are placed within the Auth module
+    LoginComponent, LogoutComponent, RegisterComponent
+  ],
+  imports: [
+    SharedModule
+  ],
+  exports: [
+    // TODO: Add declarations here, if additional components are placed within the Auth module
+    LoginComponent, LogoutComponent, RegisterComponent
+  ],
+  providers: []
 })
 export class AuthModule {
   constructor() {
-    console.log("AuthModule");
   }
-    static forRoot(config?: {}): ModuleWithProviders {
 
-        return {
-            ngModule: AuthModule,
-            providers: [
-                // DI Providers (Services, Tokens, Factories...) to be used globally and instantiated only once
+  static forRoot(config?: {}): ModuleWithProviders {
 
-                // TODO: Add services/guards/... here, if additional classes are placed within the Auth module
-                AuthResourceService,
-                AuthService,
-                SecurityTokenStore,
-                AuthGuard,
-                {
-                    provide: RequestOptions,
-                    useFactory: AuthRequestOptions.createFromTokenStore,
-                    deps: [SecurityTokenStore]
-                }]
-        };
-    }
+    return {
+      ngModule: AuthModule,
+      providers: [
+        // DI Providers (Services, Tokens, Factories...) to be used globally and instantiated only once
+
+        // TODO: Add services/guards/... here, if additional classes are placed within the Auth module
+        AuthResourceService,
+        AuthService,
+        SecurityTokenStore,
+        AuthGuard,
+        AuthGuardLogin,
+        {
+          provide: RequestOptions,
+          useFactory: AuthRequestOptions.createFromTokenStore,
+          deps: [SecurityTokenStore]
+        }]
+    };
+  }
 }

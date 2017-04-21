@@ -17,7 +17,6 @@ export class AppComponent {
 
   constructor(private router: Router) {
     router.events.subscribe(router => {
-      console.log("route Event", router);
       if (router instanceof NavigationEnd) {
         this.currUrl = router.urlAfterRedirects;
       }

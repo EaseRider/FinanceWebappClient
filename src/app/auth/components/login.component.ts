@@ -40,18 +40,10 @@ export class LoginComponent implements OnInit {
   }
 
   public doLogin(f: NgForm): boolean {
-    console.log("Halo welt", f);
     if (f.valid) {
       this.isProcessing = true;
       this.autSvc.login(new LoginInfo(f.value.login, f.value.password));
     }
     return false;
   }
-
-
-  log(val) {
-    console.log("logEntry: ", val);
-    console.log(this);
-  }
-
 }

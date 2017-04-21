@@ -3,7 +3,7 @@
     <h2>
       New Payment
     </h2>
-    <form #f="ngForm" (ngSubmit)="doPayment(f)" class="ui form">
+    <form #f="ngForm" *ngIf="showForm" (ngSubmit)="doPayment(f)" class="ui form">
       <div class="field">
         <label for="from">From:</label>
         <input type="text" id="from" name="from"
@@ -12,25 +12,45 @@
       <div class="field">
         <label for="to">To:</label>
         <input pattern="[\d]{7}" type="text" id="to" name="to" [(ngModel)]="transaction.target"
-               minlength="7" maxlength="7" #to="ngModel"
+               minlength="7" maxlength="7" #to="ngModel" required
                placeholder="Target Account Number">
         <div *ngIf="to.errors && (to.dirty || to.touched)"
              class="alert alert-danger">
           <div [hidden]="!to.errors.required">
             To-Account is required
           </div>
-          <div [hidden]="!to.errors.minlength || !to.errors.maxlength">
+          <div [hidden]="!to.errors.minlength">
+            To-Account must be exactly 7 characters long.
+          </div>
+          <div [hidden]="!to.errors.maxlength">
             To-Account must be exactly 7 characters long.
           </div>
         </div>
       </div>
-      <div class="amount">
+      <div class="field">
         <label for="from">Amount[CHF]:</label>
-        <input pattern="[\d]+" type="text" id="amount" name="amount" [(ngModel)]="transaction.amount"
+        <input pattern="[\d]+([.][\d]+)?" type="text" id="amount" name="amount" [(ngModel)]="transaction.amount"
+               minlength="1" #amount="ngModel" required
                placeholder="Target Account Number">
+        <div *ngIf="amount.errors && (amount.dirty || amount.touched)"
+             class="alert alert-danger">
+          <div [hidden]="!amount.errors.required">
+            Amount is required
+          </div>
+          <div [hidden]="!amount.errors.minlength">
+            Amount must be enough high!
+          </div>
+        </div>
       </div>
       <button class="ui primary button">Pay</button>
 
     </form>
+    <div *ngIf="!showForm && !hasError">
+      <span>Transaction to succeeded!</span>
+      <span>New Balance is </span>
+    </div>
+    <div *ngIf="hasError">
+      <span>Transaction did not succeed!</span>
+    </div>
   </div>
 </div>

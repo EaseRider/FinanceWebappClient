@@ -23,13 +23,14 @@ export class AuthService {
 
   constructor(private resource: AuthResourceService, private tokenStore: SecurityTokenStore) {
     this.updateAccountInfo();
-    // if (tokenStore.storedValue) {
-    //   this.authUser = tokenStore.storedValue.owner;
-    // }
   }
 
   public get hasCredentials(): boolean {
     return !isBlank(this.authenticatedUser);
+  }
+
+  public get hasToken(): boolean {
+    return !isBlank(this.tokenStore.storedValue);
   }
 
   public register(registerModel: RegistrationInfo): void {
