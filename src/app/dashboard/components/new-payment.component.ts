@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 //import {AccountInfo} from "../models/account-info";
-import {NgForm} from "@angular/forms";
+import {NgForm, FormControl} from "@angular/forms";
 import {TransactionService} from "../services/transaction.service";
 import {Transaction} from "../models/transaction";
 import {AccountInfo} from "../../auth/models/account-info";
@@ -12,15 +12,74 @@ import {AuthService} from "../../auth/services/auth.service";
 })
 export class NewPaymentComponent implements OnInit {
 
+  private newPayForm: NgForm;
+  @ViewChild('newPayForm') currentForm: NgForm;
   private accInfo: AccountInfo;
   private transaction: Transaction;
   private showForm: boolean = true;
   private hasError: boolean = false;
   private lastTransaction: Transaction;
+  private toForm: FormControl;
 
-  private test: any = {bla: 'wurst'};
+  formErrors = {
+    'to': '',
+    'amount': ''
+  };
+  validationMessages = {
+    'to': {
+      'required': 'To-Account is required.',
+      'minlength': 'To-Account must be exactly 7 characters long.',
+      'maxlength': ' To-Account must be exactly 7 characters long.',
+      'pattern': 'Only numbers are accepted',
+    },
+    'amount': {
+      'required': 'Power is required.'
+    }
+  };
 
   constructor(private service: TransactionService, private authServ: AuthService) {
+  }
+
+  ngAfterViewChecked() {
+    this.formChanged();
+  }
+
+  /**
+   * Basic Directive Validation: https://angular.io/docs/ts/latest/cookbook/form-validation.html#!#custom-validation-directive
+   * Extended with Async: https://netbasal.com/angular-2-forms-create-async-validator-directive-dd3fd026cb45
+   *
+   * Check FormGroup
+   */
+  formChanged() {
+    if (this.currentForm === this.newPayForm) {
+      return;
+    }
+    this.newPayForm = this.currentForm;
+    if (this.newPayForm) {
+      this.newPayForm.valueChanges
+        .subscribe(data => this.onValueChanged(data));
+    }
+  }
+
+  onValueChanged(data?: any) {
+    if (!this.newPayForm) {
+      return;
+    }
+    const form = this.newPayForm.form;
+    this.toForm = <FormControl>form.get('to');
+    for (const field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          if (messages[key])
+            this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
   }
 
   ngOnInit() {
@@ -45,6 +104,10 @@ export class NewPaymentComponent implements OnInit {
       }
     );
     this.transaction = new Transaction('', '', null, null, new Date());
+  }
+
+  public updateTargetAccount() {
+    console.log();
   }
 
   public doPayment(f: NgForm): boolean {

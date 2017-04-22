@@ -12,6 +12,7 @@ import {DashboardResourceService} from "./resources/dashboard-resource.service";
 import {MyCurrencyPipe} from "./pipes/currency.pipe";
 
 import {NgSemanticModule} from "ng-semantic/ng-semantic";
+import { IsAccountDirective } from './services/is-account.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {NgSemanticModule} from "ng-semantic/ng-semantic";
     NewPaymentComponent,
     LatestTransactionsComponent,
     AllTransactionsComponent,
-    MyCurrencyPipe],
+    MyCurrencyPipe,
+    IsAccountDirective],
   imports: [
     // Other Modules to import (imports the exported Components/Directives from the other module)
     SharedModule, DashbaordRoutingModule,

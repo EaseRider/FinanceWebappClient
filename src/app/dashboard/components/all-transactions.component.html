@@ -2,7 +2,24 @@
   All Transactions
 </h2>
 <sm-segment>
-  Filter and so on
+  <Form onSubmit={this.handleNewTransaction}>
+    <div class="ui two column grid">
+      <div class="column">
+        <div class="ui segment">
+          <select class="ui dropdown" [(ngModel)]="filterYear" (change)="selectionChange()" name="selectyear">
+            <option *ngFor="let y of years" [value]="y">{{y}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui segment">
+          <select class="ui dropdown" [(ngModel)]="filterMonth" (change)="selectionChange()" name="selectmonth">
+            <option *ngFor="let m of months; let i = index" [value]="i">{{m}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </Form>
 </sm-segment>
 <table class="ui celled table">
   <thead>

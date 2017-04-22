@@ -10,6 +10,7 @@ import {Transaction} from "../models";
 import {ResourceBase} from "./resource-base";
 import {QueryInformation} from "../models/query-information";
 import {SecurityTokenStore} from "../../auth/services/credential-management/security-token-store";
+import {AccountInfo} from "../../auth/models/account-info";
 
 
 @Injectable()
@@ -47,53 +48,18 @@ export class DashboardResourceService extends ResourceBase {
       });
   }
 
-  /*
+  public validateAccountNumber(accnr: string): Observable<{[key: string]: any}> {
+    return this.get(`/accounts/${accnr}`)
+      .map((response: Response) => {
+        let result = response.json();
+        if (result) {
+          return Observable.of<{[key: string]: any}>({isAccount: true, account: result});
+        }
+        return Observable.of<{[key: string]: any}>({isAccount: {isAccount: false, account: null}});
+      })
+      .catch((error: any) => {
+        return Observable.of<{[key: string]: any}>({isAccount: {isAccount: false, account: null}});
 
-   export function transfer(
-   target: AccountNr,
-   amount: number,
-   token: string,
-   ): Promise<TransferResult> {
-   return postAuthenticatedJson('/accounts/transactions', token, {target, amount}).then(parseJSON)
-   }
-
-   export function getTransactions(
-   token: string,
-   fromDate: string = "",
-   toDate: string = "",
-   count: number = 3,
-   skip: number = 0,
-   ): Promise<{result: Array<Transaction>, query: { resultcount: number}}> {
-   return getAuthenticatedJson(
-   `/accounts/transactions?fromDate=${fromDate}&toDate=${toDate}&count=${count}&skip=${skip}`,
-   token).then(parseJSON)
-   }
-
-   public register(model:RegistrationInfo):Observable<Account> {
-   return this.post('/auth/register', model.toDto())
-   .map((response: Response) => {
-   let result = response.json();
-   if (result) {
-   return Account.fromDto(result);
-   }
-   return null;
-   })
-   .catch((error:any) => {
-   return Observable.of<Account>(null);
-   });
-   }
-
-   public login(model:LoginInfo):Observable<Credential> {
-   return this.post('/auth/login', model.toDto())
-   .map((response: Response) => {
-   let result = response.json();
-   if (result) {
-   return Credential.fromDto(result);
-   }
-   return null;
-   })
-   .catch((error:any) => {
-   return Observable.of<Credential>(null);
-   });
-   }*/
+      })
+  }
 }

@@ -3,6 +3,8 @@ import {Transaction} from "../models/transaction";
 import {isBlank} from "@angular/core/src/facade/lang";
 import {DashboardResourceService} from "../resources/dashboard-resource.service";
 import {QueryInformation} from "../models/query-information";
+import {AccountInfo} from "../../auth/models/account-info";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class TransactionService {
@@ -11,6 +13,7 @@ export class TransactionService {
 
   public lastTransactionChange: EventEmitter<Transaction[]> = new EventEmitter<Transaction[]>();
   public filteredTransactionChange: EventEmitter<Transaction[]> = new EventEmitter<Transaction[]>();
+  public accountInfo: EventEmitter<AccountInfo> = new EventEmitter<AccountInfo>();
 
   public transferChangeEvent: EventEmitter<Transaction> = new EventEmitter<Transaction>();
 
@@ -47,6 +50,10 @@ export class TransactionService {
         this.filteredTransactionChange.emit(this.filteredTransactions);
       }
     );
+  }
+
+  public validateAccountNumber(accnr: string): Observable<{[key: string]: any}> {
+    return this.resource.validateAccountNumber(accnr);
   }
 
 

@@ -10,7 +10,7 @@ export class Transaction {
   }
 
   public static fromDto(data: any): Transaction {
-    return new Transaction(data.from, data.target, data.amount, data.total, data.date);
+    return new Transaction(data.from, data.target, data.amount, data.total, new Date(data.date));
   }
 
   toDto(): any {

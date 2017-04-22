@@ -10,9 +10,11 @@ import {TransactionService} from "../services/transaction.service";
 })
 export class AllTransactionsComponent implements OnInit {
   private transactions: Transaction[] = [];
-  private filterYear: number = 2017;
-  private filterMonth: number = 1;
-  query: QueryInformation = new QueryInformation(0, 0, 0, null, '1999', null, 'today');
+  private filterYear: number = (new Date()).getFullYear();
+  private filterMonth: number = (new Date()).getMonth();
+
+  private years: number[] = [2017, 2016, 2015];
+  private months: string[] = ['Jannuary', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   constructor(private service: TransactionService ) {
     this.service.filteredTransactionChange.subscribe((tr: Transaction[]) => {
@@ -20,13 +22,18 @@ export class AllTransactionsComponent implements OnInit {
     });
   }
 
+  selectionChange(): void {
+    this.filterMonth = parseInt(this.filterMonth.toString());
+    this.filterYear = parseInt(this.filterYear.toString());
+    this.updateView();
+  }
   ngOnInit() {
     this.updateView();
   }
 
   updateView(): void {
     var start = new Date(Date.UTC(this.filterYear, this.filterMonth, 1));
-    var end = new Date(Date.UTC(this.filterYear, this.filterMonth + 1, 0, 24, 0, -1));
+    var end = new Date(Date.UTC(this.filterYear, (this.filterMonth + 1), 0, 23, 59, 59, 999));
     var query: QueryInformation = new QueryInformation(0, 0,
       0, start, null, end, null);
     this.service.getFilteredTransactions(query);

@@ -3,7 +3,7 @@
     <h2>
       New Payment
     </h2>
-    <form #f="ngForm" *ngIf="showForm" (ngSubmit)="doPayment(f)" class="ui form">
+    <form #newPayForm="ngForm" *ngIf="showForm" (ngSubmit)="doPayment(newPayForm)" class="ui form">
       <div class="field">
         <label for="from">From:</label>
         <input type="text" id="from" name="from"
@@ -11,25 +11,18 @@
       </div>
       <div class="field">
         <label for="to">To:</label>
-        <input pattern="[\d]{7}" type="text" id="to" name="to" [(ngModel)]="transaction.target"
-               minlength="7" maxlength="7" #to="ngModel" required
+        <input pattern="[\d]*" type="text" id="to" name="to" [(ngModel)]="transaction.target"
+               minlength="7" maxlength="7" #to="ngModel" required [isAccount]="transaction.target"
                placeholder="Target Account Number">
-        <div *ngIf="to.errors && (to.dirty || to.touched)"
-             class="alert alert-danger">
-          <div [hidden]="!to.errors.required">
-            To-Account is required
-          </div>
-          <div [hidden]="!to.errors.minlength">
-            To-Account must be exactly 7 characters long.
-          </div>
-          <div [hidden]="!to.errors.maxlength">
-            To-Account must be exactly 7 characters long.
-          </div>
+        <div *ngIf="formErrors.to" class="ui red message">{{formErrors.to}}</div>
+        <div *ngIf="toForm?.errors?.value" class="ui blue message">
+          Valid Account {{toForm.errors.value.account.accountNr}} of {{toForm.errors.value.account.owner.firstname}} {{toForm.errors.value.account.owner.lastname}}
         </div>
+        <div *ngIf="toForm?.errors?.isAccount" class="ui red message">Given Number is not an existing account Number.</div>
       </div>
       <div class="field">
         <label for="from">Amount[CHF]:</label>
-        <input pattern="[\d]+([.][\d]+)?" type="text" id="amount" name="amount" [(ngModel)]="transaction.amount"
+        <input pattern="[\d]+([.,][\d]+)?" type="text" id="amount" name="amount" [(ngModel)]="transaction.amount"
                minlength="1" #amount="ngModel" required
                placeholder="Target Account Number">
         <div *ngIf="amount.errors && (amount.dirty || amount.touched)"
