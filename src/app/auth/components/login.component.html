@@ -1,15 +1,15 @@
 <!-- TODO: Add ng2 specific directives/validation settings and add styling -->
 <div class="ui card">
   <div class="content">
-    <form #f="ngForm" name="loginForm" (ngSubmit)="doLogin(f)" class="ui form">
+    <form #loginForm="ngForm" name="loginForm" (ngSubmit)="doLogin(loginForm)" class="ui form">
       <div class="field">
-        <input class="ui input" pattern=".{3,}" placeholder="User" type="text" name="login" #loginnn ngModel required/>
-        <div>Please specify your login, at least three characters.</div>
+        <input class="ui input" minlength="3" placeholder="User" type="text" name="login" ngModel required/>
+        <div *ngIf="formErrors.login" class="ui red message">{{formErrors.login}}</div>
       </div>
       <div class="field">
-        <input class="ui input" pattern=".{3,}" placeholder="Password" type="password" name="password" ngModel
+        <input class="ui input" minlength="3" placeholder="Password" type="password" name="password" ngModel
                required/>
-        <div>Please specify your login, at least three characters.</div>
+        <div *ngIf="formErrors.password" class="ui red message">{{formErrors.password}}</div>
       </div>
       <button class="ui primary button">Login</button>
     </form>

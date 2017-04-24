@@ -48,17 +48,18 @@ export class DashboardResourceService extends ResourceBase {
       });
   }
 
-  public validateAccountNumber(accnr: string): Observable<{[key: string]: any}> {
+  public validateAccountNumber(accnr: string, accInfo: any): Observable<{[key: string]: any}> {
     return this.get(`/accounts/${accnr}`)
       .map((response: Response) => {
         let result = response.json();
         if (result) {
-          return Observable.of<{[key: string]: any}>({isAccount: true, account: result});
+          accInfo.account = result;
+          return null;//Observable.of<{[key: string]: any}>({isAccount: true, account: result});
         }
-        return Observable.of<{[key: string]: any}>({isAccount: {isAccount: false, account: null}});
+        return Observable.of<{[key: string]: any}>({isAccount: {isAccount: false}});
       })
       .catch((error: any) => {
-        return Observable.of<{[key: string]: any}>({isAccount: {isAccount: false, account: null}});
+        return Observable.of<{[key: string]: any}>({isAccount: {isAccount: false}});
 
       })
   }

@@ -21,6 +21,8 @@ export class NewPaymentComponent implements OnInit {
   private lastTransaction: Transaction;
   private toForm: FormControl;
 
+  private selectedAccInfo: any = {account: null};
+
   formErrors = {
     'to': '',
     'amount': ''
@@ -33,7 +35,8 @@ export class NewPaymentComponent implements OnInit {
       'pattern': 'Only numbers are accepted',
     },
     'amount': {
-      'required': 'Power is required.'
+      'required': 'Amount is required.',
+      'pattern': 'Amount must be above 0.05 CHF.'
     }
   };
 
@@ -67,6 +70,10 @@ export class NewPaymentComponent implements OnInit {
     }
     const form = this.newPayForm.form;
     this.toForm = <FormControl>form.get('to');
+    if (!this.toForm.valid) {
+      this.selectedAccInfo.account = null;
+    }
+
     for (const field in this.formErrors) {
       // clear previous error message (if any)
       this.formErrors[field] = '';
@@ -106,15 +113,11 @@ export class NewPaymentComponent implements OnInit {
     this.transaction = new Transaction('', '', null, null, new Date());
   }
 
-  public updateTargetAccount() {
-    console.log();
-  }
-
   public doPayment(f: NgForm): boolean {
     if (f.valid) {
       this.service.createTransfer(this.transaction);
+      f.resetForm();
     }
-    f.resetForm();
     return false;
   }
 

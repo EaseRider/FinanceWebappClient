@@ -52,8 +52,8 @@ export class TransactionService {
     );
   }
 
-  public validateAccountNumber(accnr: string): Observable<{[key: string]: any}> {
-    return this.resource.validateAccountNumber(accnr);
+  public validateAccountNumber(accnr: string, accInfo: any): Observable<{[key: string]: any}> {
+    return this.resource.validateAccountNumber(accnr, accInfo);
   }
 
 

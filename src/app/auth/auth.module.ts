@@ -11,11 +11,13 @@ import {
 } from "./components";
 import {SharedModule} from "../shared/shared.module";
 import {AuthGuardLogin} from "./services/authguard-login.service";
+import {EqualsToDirective} from "./services/equals-input.directive";
 
 @NgModule({
   declarations: [
     // TODO: Add declarations here, if additional components are placed within the Auth module
-    LoginComponent, LogoutComponent, RegisterComponent
+    LoginComponent, LogoutComponent, RegisterComponent,
+    EqualsToDirective
   ],
   imports: [
     SharedModule

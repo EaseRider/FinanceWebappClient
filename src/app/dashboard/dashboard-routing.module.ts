@@ -25,14 +25,7 @@ const appRoutes: Routes = [
   exports: [
     RouterModule
   ],
-  providers: [
-    {
-      provide: 'checkActivation',
-      useValue: (route: any, state: any) => {
-        return true;
-      }
-    }
-  ]
+  providers: []
 })
 export class DashbaordRoutingModule {
 }

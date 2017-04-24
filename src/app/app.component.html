@@ -1,5 +1,9 @@
 <div class="ui secondary pointing menu" color="primary" layout="row">
-  <div class="ui item">Finance App</div>
+  <div>
+    <div class="ui item top medium header">
+      Finance App
+    </div>
+  </div>
   <div *ngFor="let el of navigation | filter : 'main' : currUrl">
     <a class="ui item {{currUrl | isactivenav: el.url}}"
        routerLink="{{el.url}}" href="">{{el.name}}</a>

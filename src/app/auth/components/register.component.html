@@ -1,40 +1,42 @@
 <!-- TODO: Add ng2 specific directives/validation settings and add styling -->
 <div class="ui card">
   <div class="content">
-    <form (ngSubmit)="doRegister(null)" class="ui form">
+    <form #registerForm="ngForm" (ngSubmit)="doRegister(registerForm)" class="ui form">
       <div class="field">
         <label>First name:</label>
         <div>
-          <input pattern=".{2,}" placeholder="First name" type="text" name="firstname"/>
-          <div>Please specify your first name.</div>
+          <input [(ngModel)]="firstname" minlength="2" required pattern=".{2,}" placeholder="First name" type="text"
+                 name="firstname"/>
+          <div *ngIf="formErrors.firstname" class="ui red message">{{formErrors.firstname}}</div>
         </div>
       </div>
       <div class="field">
         <label>Last name:</label>
         <div>
-          <input pattern=".{2,}" placeholder="Last name" type="text" name="lastname"/>
-          <div>Please specify your last name.</div>
+          <input [(ngModel)]="lastname" minlength="2" required placeholder="Last name" type="text" name="lastname"/>
+          <div *ngIf="formErrors.lastname" class="ui red message">{{formErrors.lastname}}</div>
         </div>
       </div>
       <div class="field">
         <label>User name:</label>
         <div>
-          <input pattern=".{3,}" placeholder="User" type="text" name="login"/>
-          <div>Please specify your login, at least three characters.</div>
+          <input [(ngModel)]="login" minlength="3" required placeholder="User" type="text" name="login"/>
+          <div *ngIf="formErrors.login" class="ui red message">{{formErrors.login}}</div>
         </div>
       </div>
       <div class="field">
         <label>Password:</label>
         <div>
-          <input pattern=".{3,}" placeholder="Password" type="password" name="password"/>
-          <div>Please specify your password, at least three characters.</div>
+          <input [(ngModel)]="password" minlength="3" required placeholder="Password" type="password" name="password"/>
+          <div *ngIf="formErrors.password" class="ui red message">{{formErrors.password}}</div>
         </div>
       </div>
       <div class="field">
         <label>Confirm Password:</label>
         <div>
-          <input pattern=".{3,}" placeholder="Password" type="password" name="passwordConfirm"/>
-          <div>Please confirm your password.</div>
+          <input placeholder="Password" [(ngModel)]="passwordConfirm" [CheckEqualsInput]="password" required
+                 type="password" name="passwordConfirm"/>
+          <div *ngIf="formErrors.passwordConfirm" class="ui red message">{{formErrors.passwordConfirm}}</div>
         </div>
       </div>
       <button class="ui primary button">Register</button>
