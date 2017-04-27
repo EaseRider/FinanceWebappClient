@@ -7,7 +7,7 @@ import {TransactionService} from "../services/transaction.service";
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-
+  testval:number = 42;
   constructor() { }
 
   ngOnInit() {

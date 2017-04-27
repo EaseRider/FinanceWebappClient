@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, Input} from '@angular/core';
 //import {AccountInfo} from "../models/account-info";
 import {NgForm, FormControl} from "@angular/forms";
 import {TransactionService} from "../services/transaction.service";
@@ -11,6 +11,8 @@ import {AuthService} from "../../auth/services/auth.service";
   templateUrl: 'new-payment.component.html'
 })
 export class NewPaymentComponent implements OnInit {
+
+  @Input() testvalue: any;
 
   private newPayForm: NgForm;
   @ViewChild('newPayForm') currentForm: NgForm;
@@ -41,6 +43,7 @@ export class NewPaymentComponent implements OnInit {
   };
 
   constructor(private service: TransactionService, private authServ: AuthService) {
+
   }
 
   ngAfterViewChecked() {
@@ -65,6 +68,7 @@ export class NewPaymentComponent implements OnInit {
   }
 
   onValueChanged(data?: any) {
+    console.log("Testavalue", this.testvalue);
     if (!this.newPayForm) {
       return;
     }
