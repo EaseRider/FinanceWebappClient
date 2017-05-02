@@ -43,7 +43,32 @@ export class NewPaymentComponent implements OnInit {
   };
 
   constructor(private service: TransactionService, private authServ: AuthService) {
+  }
 
+  ngOnInit() {
+    this.authServ.accountInfoChanged.subscribe(
+      (acc: AccountInfo) => {
+        console.log('AccInfoChange', acc);
+        this.accInfo = acc;
+        this.transaction.total = acc.amount;
+      }
+    );
+    this.authServ.updateAccountInfo();
+    console.log('NgInit');
+    this.service.transferChangeEvent.subscribe(
+      (res: Transaction) => {
+        if (res) {
+          this.lastTransaction = res;
+          this.service.updateLatestTransactions();
+          this.transaction.total = res.total;
+          this.transaction.target = '';
+          this.transaction.amount = null;
+        } else {
+          this.lastTransaction = null;
+        }
+      }
+    );
+    this.transaction = new Transaction('', '', null, null, new Date());
   }
 
   ngAfterViewChecked() {
@@ -74,7 +99,7 @@ export class NewPaymentComponent implements OnInit {
     }
     const form = this.newPayForm.form;
     this.toForm = <FormControl>form.get('to');
-    if (!this.toForm.valid) {
+    if (this.toForm === null || !this.toForm.valid) {
       this.selectedAccInfo.account = null;
     }
 
@@ -91,30 +116,6 @@ export class NewPaymentComponent implements OnInit {
         }
       }
     }
-  }
-
-  ngOnInit() {
-    this.authServ.accountInfoChanged.subscribe(
-      (acc: AccountInfo) => {
-        this.accInfo = acc;
-        this.transaction.total = acc.amount;
-      }
-    );
-    this.authServ.updateAccountInfo();
-    this.service.transferChangeEvent.subscribe(
-      (res: Transaction) => {
-        if (res) {
-          this.lastTransaction = res;
-          this.service.updateLatestTransactions();
-          this.transaction.total = res.total;
-          this.transaction.target = '';
-          this.transaction.amount = null;
-        } else {
-          this.lastTransaction = null;
-        }
-      }
-    );
-    this.transaction = new Transaction('', '', null, null, new Date());
   }
 
   public doPayment(f: NgForm): boolean {

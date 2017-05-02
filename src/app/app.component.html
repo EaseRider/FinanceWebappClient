@@ -1,18 +1,14 @@
-<div class="ui secondary pointing menu" color="primary" layout="row">
-  <div>
-    <div class="ui item top medium header">
-      Finance App
-    </div>
+<sm-menu class="secondary pointing primary stackable" layout="row">
+  <div class="header item huge label">
+    Finance App
   </div>
-  <div *ngFor="let el of navigation | filter : 'main' : currUrl">
-    <a class="ui item {{currUrl | isactivenav: el.url}}"
-       routerLink="{{el.url}}" href="">{{el.name}}</a>
-  </div>
-  <div class="right menu">
+  <a sm-item *ngFor="let el of navigation | filter : 'main' : currUrl" class="ui item {{currUrl | isactivenav: el.url}}"
+     routerLink="{{el.url}}" href="">{{el.name}}</a>
+  <sm-menu class="menu right secondary">
     <div class="item">
       <wed-logout></wed-logout>
     </div>
-  </div>
-</div>
+  </sm-menu>
+</sm-menu>
 <router-outlet></router-outlet>
 
