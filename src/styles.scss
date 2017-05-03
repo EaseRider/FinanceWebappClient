@@ -1,6 +1,30 @@
+@import '~@angular/material/theming';
 
-// reset
+@include mat-core();
+
+$finance-webapp-primary: mat-palette($mat-indigo, 500, A100, A400);
+$finance-webapp-accent: mat-palette($mat-grey, 400);
+$finance-webapp-warn: mat-palette($mat-red, 600);
+
+$theme: mat-light-theme($finance-webapp-primary, $finance-webapp-accent, $finance-webapp-warn);
+
+@include angular-material-theme($theme);
+
 body {
   padding: 0;
-  margin: 0 2em;
+  margin: 0;
+}
+
+md-card {
+  margin: 1%;
+}
+
+.infoText {
+  margin-bottom: 15px;
+  font-size: 0.8rem;
+}
+
+.link {
+  color: #283593;
+  cursor: pointer;
 }
