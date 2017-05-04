@@ -1,0 +1,7 @@
+<md-card>
+  <md-card-title>Latest Transactions</md-card-title>
+  <md-card-content>
+    <app-transaction-table [formatDate]="formatDate" [transactions]="transactions"> </app-transaction-table>
+    <a md-raised-button color="accent" (click)="showAll()">All Transactions</a>
+  </md-card-content>
+</md-card>
