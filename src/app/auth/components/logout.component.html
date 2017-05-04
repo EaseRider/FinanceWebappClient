@@ -1,2 +1,3 @@
-<!-- TODO: Add ng2 specific directives/validation settings and add styling -->
-<button class="ui button" *ngIf="user" (click)="doLogout()">Logout {{user.firstname}} {{user.lastname}}</button>
+<div *ngIf="user">
+  <button md-raised-button class="logoutButton" color="accent" (click)="doLogout()">Logout {{user.firstname }} {{user.lastname }}</button>
+</div>

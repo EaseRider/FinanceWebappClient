@@ -1,17 +1,23 @@
-<!-- TODO: Add ng2 specific directives/validation settings and add styling -->
-<div class="ui card">
-  <div class="content">
-    <form #loginForm="ngForm" name="loginForm" (ngSubmit)="doLogin(loginForm)" class="ui form">
-      <div class="field">
-        <input class="ui input" minlength="3" placeholder="User" type="text" name="login" ngModel required/>
-        <div *ngIf="formErrors.login" class="ui red message">{{formErrors.login}}</div>
+<md-card>
+  <md-card-title>Login</md-card-title>
+  <md-card-content>
+    <form (ngSubmit)="doLogin(loginForm)" #loginForm="ngForm">
+      <div>
+        <md-input-container>
+          <input mdInput placeholder="Username" pattern=".{3,}" placeholder="User" class="form-control" required type="text" #name="ngModel" ngModel name="login" />
+        </md-input-container>
+          <div class="infoText">Please specify your login, at least three characters.</div>
       </div>
-      <div class="field">
-        <input class="ui input" minlength="3" placeholder="Password" type="password" name="password" ngModel
-               required/>
-        <div *ngIf="formErrors.password" class="ui red message">{{formErrors.password}}</div>
+      <div>
+        <md-input-container>
+          <input mdInput placeholder="Password" pattern=".{3,}" placeholder="Password" type="password" name="password" ngModel />
+        </md-input-container>
+          <div class="infoText">Please specify your login, at least three characters.</div>
       </div>
-      <button class="ui primary button">Login</button>
+      <button md-raised-button color="accent">Login</button>
     </form>
-  </div>
-</div>
+  </md-card-content>
+  <br />
+  Not yet registered? <a class="link" (click)="goToRegister()">Register</a>&nbsp;here instead.
+</md-card>
+

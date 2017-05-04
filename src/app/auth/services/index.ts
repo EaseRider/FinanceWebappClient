@@ -1,4 +1,2 @@
-export * from "./credential-management";
-export * from "./authguard.service"
-export * from "./auth.service";
-
+export * from './credential-management';
+export * from './auth.service';

@@ -1,36 +1,30 @@
 import {Injectable} from '@angular/core';
-import {Account} from "../../models/account";
-import {AccountInfo} from "../../models/account-info";
 
-/**
- * TODO: Add localStorage logic here...
- */
 @Injectable()
 export class SecurityTokenStore {
   private token: SecurityToken;
 
   constructor() {
+    if (localStorage.getItem('token')){
+      try {
+        this.token = JSON.parse(localStorage.getItem('token'));
+      } catch (error) {
+        this.token = null;
+      }
+    }
   }
 
   public get storedValue(): SecurityToken {
-    if (!this.token) {
-
-      const token = sessionStorage.getItem('token');
-      if (token) {
-        this.token = {
-          token: token
-        };
-      }
-    }
     return this.token;
   }
 
   public set storedValue(value: SecurityToken) {
-    sessionStorage.setItem('token', value === null ? '' : value.token);
+    localStorage.setItem('token', JSON.stringify(value));
     this.token = value;
   }
 }
 
 export interface SecurityToken {
-  token: string
+  token: string;
+  owner: any;
 }

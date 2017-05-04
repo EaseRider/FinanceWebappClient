@@ -4,8 +4,8 @@ import {Response, Http} from "@angular/http";
 import {Observable} from "rxjs";
 
 import {LoginInfo, Account, RegistrationInfo, Credential} from "../models";
+
 import {ResourceBase} from "./resource-base";
-import {AccountInfo} from "../models/account-info";
 
 @Injectable()
 export class AuthResourceService extends ResourceBase {
@@ -13,7 +13,7 @@ export class AuthResourceService extends ResourceBase {
     super(http);
   }
 
-  public register(model:RegistrationInfo):Observable<Account> {
+  public register(model: RegistrationInfo, errorHandler: (error: any) => void): Observable<Account> {
     return this.post('/auth/register', model.toDto())
       .map((response: Response) => {
         let result = response.json();
@@ -22,12 +22,22 @@ export class AuthResourceService extends ResourceBase {
         }
         return null;
       })
-      .catch((error:any) => {
+      .catch((error: any) => {
+        var errorMessage = "Server-side error";
+        if (error._body !== undefined) {
+          const result = error.json();
+          if (result.data.errorType == "uniqueViolated") {
+            errorMessage += ": " + result.data.key + " must be unique!";
+          } else {
+            errorMessage += ": " + result.data.key + " " + result.data.errorType;
+          }
+        }
+        errorHandler(errorMessage);
         return Observable.of<Account>(null);
       });
   }
 
-  public login(model:LoginInfo):Observable<Credential> {
+  public login(model: LoginInfo): Observable<Credential> {
     return this.post('/auth/login', model.toDto())
       .map((response: Response) => {
         let result = response.json();
@@ -36,20 +46,8 @@ export class AuthResourceService extends ResourceBase {
         }
         return null;
       })
-      .catch((error:any) => {
+      .catch((error: any) => {
         return Observable.of<Credential>(null);
       });
-  }
-
-  public getAccountInfo(): Observable<AccountInfo> {
-    return this.get('/accounts/').map(
-      (response: Response) => {
-        let result = response.json();
-        if (result) {
-          return AccountInfo.fromDto(result);
-        }
-        return null;
-      }
-    );
   }
 }

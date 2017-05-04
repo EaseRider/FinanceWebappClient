@@ -5,8 +5,8 @@ import {NavigationService} from "../../core/services/navigation.service";
 import {AuthService} from "../services";
 import {Account} from "../models";
 
-@ Component({
-  selector: 'wed-logout',
+@Component({
+  selector: 'logout-button',
   templateUrl: 'logout.component.html'
 })
 export class LogoutComponent implements OnInit {
@@ -20,13 +20,16 @@ export class LogoutComponent implements OnInit {
     this.user = this.autSvc.authenticatedUser;
     this.autSvc.authenticatedUserChange.subscribe(
       (credentials) => {
-        this.user = credentials;
+        if (!credentials) {
+          this.navigationSvc.goToHome();
+        }else{
+          this.user = this.autSvc.authenticatedUser;
+        }
       });
-    this.autSvc.updateAccountInfo();
   }
 
   public doLogout() {
     this.autSvc.logout();
-    this.navigationSvc.goToHome();
+    this.user = null;
   }
 }

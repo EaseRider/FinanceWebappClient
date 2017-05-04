@@ -1,45 +1,40 @@
-<!-- TODO: Add ng2 specific directives/validation settings and add styling -->
-<div class="ui card">
-  <div class="content">
-    <form #registerForm="ngForm" (ngSubmit)="doRegister(registerForm)" class="ui form">
-      <div class="field">
-        <label>First name:</label>
-        <div>
-          <input [(ngModel)]="firstname" minlength="2" required pattern=".{2,}" placeholder="First name" type="text"
-                 name="firstname"/>
-          <div *ngIf="formErrors.firstname" class="ui red message">{{formErrors.firstname}}</div>
-        </div>
+<md-card>
+  <md-card-title>Register</md-card-title>
+  <md-card-content>
+    <form (ngSubmit)="doRegister(registerForm)" #registerForm="ngForm">
+      <div>
+        <md-input-container>
+          <input mdInput pattern=".{3,}" placeholder="First name" type="text" class="form-control" required #name="ngModel" ngModel name="firstname" />
+        </md-input-container>
+        <div class="infoText">Please specify your first name.</div>
       </div>
-      <div class="field">
-        <label>Last name:</label>
-        <div>
-          <input [(ngModel)]="lastname" minlength="2" required placeholder="Last name" type="text" name="lastname"/>
-          <div *ngIf="formErrors.lastname" class="ui red message">{{formErrors.lastname}}</div>
-        </div>
+      <div>
+        <md-input-container>
+          <input mdInput pattern=".{3,}" placeholder="Last name" type="text" class="form-control" required #name="ngModel" ngModel name="lastname" />
+        </md-input-container>
+        <div class="infoText">Please specify your last name.</div>
       </div>
-      <div class="field">
-        <label>User name:</label>
-        <div>
-          <input [(ngModel)]="login" minlength="3" required placeholder="User" type="text" name="login"/>
-          <div *ngIf="formErrors.login" class="ui red message">{{formErrors.login}}</div>
-        </div>
+      <div>
+        <md-input-container>
+          <input mdInput pattern=".{3,}" placeholder="Username" type="text" class="form-control" required #name="ngModel" ngModel name="login" />
+        </md-input-container>
+        <div class="infoText">Please specify your login, at least three characters.</div>
       </div>
-      <div class="field">
-        <label>Password:</label>
-        <div>
-          <input [(ngModel)]="password" minlength="3" required placeholder="Password" type="password" name="password"/>
-          <div *ngIf="formErrors.password" class="ui red message">{{formErrors.password}}</div>
-        </div>
+      <div>
+        <md-input-container>
+          <input mdInput placeholder="Password" pattern=".{3,}" type="password" id="password" required name="password" ngModel #password="ngModel" />
+        </md-input-container>
+          <div class="infoText">Please specify your login, at least three characters.</div>
       </div>
-      <div class="field">
-        <label>Confirm Password:</label>
-        <div>
-          <input placeholder="Password" [(ngModel)]="passwordConfirm" [CheckEqualsInput]="password" required
-                 type="password" name="passwordConfirm"/>
-          <div *ngIf="formErrors.passwordConfirm" class="ui red message">{{formErrors.passwordConfirm}}</div>
-        </div>
+      <div>
+        <md-input-container>
+          <input mdInput placeholder="Password" pattern=".{3,}" isEqual="password" type="password" required #name="ngModel" name="confirmationPassword" ngModel />
+        </md-input-container>
+        <div class="infoText">Please confirm your password.</div>
       </div>
-      <button class="ui primary button">Register</button>
+      <button md-raised-button color="accent">Register</button>
     </form>
-  </div>
-</div>
+  </md-card-content>
+  <br />
+  Already have an account?<a class="link" (click)="goToLogin()"> Go to Login</a>&nbsp;instead.
+</md-card>
