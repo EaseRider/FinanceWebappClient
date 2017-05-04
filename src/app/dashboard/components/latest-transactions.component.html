@@ -1,26 +1,24 @@
-<div class="ui card fluid">
-  <div class="content">
-    <h2>
-      Latest Transactions
-    </h2>
-    <table class="ui celled table">
-      <thead>
-      <tr>
-        <th><span>Source</span></th>
-        <th><span>Target</span></th>
-        <th>Amount [CHF]</th>
-        <th>Balance [CHF]</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let tr of transactions">
-        <td><strong>{{tr.from}}</strong></td>
-        <td>{{tr.target}}</td>
-        <td class="right aligned">{{tr.amount | number:'1.2-2'}}</td>
-        <td class="right aligned">{{tr.total | number:'1.2-2'}}</td>
-      </tr>
-      </tbody>
-    </table>
-    <button class="ui primary button" (click)="goToAllTransaction()">All Transactions</button>
+<div class="ui segment raised topMargin" style="margin-top: 20px;">
+  <div class="ui medium header">
+    Latest Transactions
   </div>
+  <table class="ui celled table unstackable striped">
+    <thead>
+    <tr>
+      <th><span>Source</span></th>
+      <th><span>Target</span></th>
+      <th>Amount [CHF]</th>
+      <th>Balance [CHF]</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tr of transactions">
+      <td><strong>{{tr.from}}</strong></td>
+      <td>{{tr.target}}</td>
+      <td class="right aligned">{{tr.amount | number:'1.2-2'}}</td>
+      <td class="right aligned">{{tr.total | number:'1.2-2'}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <button class="ui primary button" (click)="goToAllTransaction()">All Transactions</button>
 </div>

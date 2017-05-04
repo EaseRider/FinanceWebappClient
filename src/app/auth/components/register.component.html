@@ -1,45 +1,44 @@
 <!-- TODO: Add ng2 specific directives/validation settings and add styling -->
-<div class="ui card">
-  <div class="content">
-    <form #registerForm="ngForm" (ngSubmit)="doRegister(registerForm)" class="ui form">
-      <div class="field">
-        <label>First name:</label>
-        <div>
-          <input [(ngModel)]="firstname" minlength="2" required pattern=".{2,}" placeholder="First name" type="text"
-                 name="firstname"/>
-          <div *ngIf="formErrors.firstname" class="ui red message">{{formErrors.firstname}}</div>
-        </div>
+<div class="ui segment raised" style="margin-top: 20px;">
+  <div class="ui huge header">Welcome to the financial Disaster!</div>
+  <form #registerForm="ngForm" (ngSubmit)="doRegister(registerForm)" class="ui form">
+    <div class="field">
+      <label>First name:</label>
+      <div>
+        <input [(ngModel)]="firstname" minlength="2" required pattern=".{2,}" placeholder="First name" type="text"
+               name="firstname"/>
+        <div *ngIf="formErrors.firstname" class="ui red message">{{formErrors.firstname}}</div>
       </div>
-      <div class="field">
-        <label>Last name:</label>
-        <div>
-          <input [(ngModel)]="lastname" minlength="2" required placeholder="Last name" type="text" name="lastname"/>
-          <div *ngIf="formErrors.lastname" class="ui red message">{{formErrors.lastname}}</div>
-        </div>
+    </div>
+    <div class="field">
+      <label>Last name:</label>
+      <div>
+        <input [(ngModel)]="lastname" minlength="2" required placeholder="Last name" type="text" name="lastname"/>
+        <div *ngIf="formErrors.lastname" class="ui red message">{{formErrors.lastname}}</div>
       </div>
-      <div class="field">
-        <label>User name:</label>
-        <div>
-          <input [(ngModel)]="login" minlength="3" required placeholder="User" type="text" name="login"/>
-          <div *ngIf="formErrors.login" class="ui red message">{{formErrors.login}}</div>
-        </div>
+    </div>
+    <div class="field">
+      <label>User name:</label>
+      <div>
+        <input [(ngModel)]="login" minlength="3" required placeholder="User" type="text" name="login"/>
+        <div *ngIf="formErrors.login" class="ui red message">{{formErrors.login}}</div>
       </div>
-      <div class="field">
-        <label>Password:</label>
-        <div>
-          <input [(ngModel)]="password" minlength="3" required placeholder="Password" type="password" name="password"/>
-          <div *ngIf="formErrors.password" class="ui red message">{{formErrors.password}}</div>
-        </div>
+    </div>
+    <div class="field">
+      <label>Password:</label>
+      <div>
+        <input [(ngModel)]="password" minlength="3" required placeholder="Password" type="password" name="password"/>
+        <div *ngIf="formErrors.password" class="ui red message">{{formErrors.password}}</div>
       </div>
-      <div class="field">
-        <label>Confirm Password:</label>
-        <div>
-          <input placeholder="Password" [(ngModel)]="passwordConfirm" [CheckEqualsInput]="password" required
-                 type="password" name="passwordConfirm"/>
-          <div *ngIf="formErrors.passwordConfirm" class="ui red message">{{formErrors.passwordConfirm}}</div>
-        </div>
+    </div>
+    <div class="field">
+      <label>Confirm Password:</label>
+      <div>
+        <input placeholder="Password" [(ngModel)]="passwordConfirm" [CheckEqualsInput]="password" required
+               type="password" name="passwordConfirm"/>
+        <div *ngIf="formErrors.passwordConfirm" class="ui red message">{{formErrors.passwordConfirm}}</div>
       </div>
-      <button class="ui primary button">Register</button>
-    </form>
-  </div>
+    </div>
+    <button class="ui primary button">Register</button>
+  </form>
 </div>
