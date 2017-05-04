@@ -15,7 +15,7 @@ export class TransactionResource extends ResourceBase {
   }
 
   public getTransactions(req: TransactionFilter): Observable<TransactionModel[]> {
-    return this.get(`/accounts/transactions?&count=${req.count}fromDate=${req.fromDate}&toDate=${req.toDate}&skip=${req.skip}`)
+    return this.get(`/accounts/transactions?count=${req.count}&fromDate=${req.fromDate}&toDate=${req.toDate}&skip=${req.skip}`)
       .map((response: Response) => {
         const result = response.json().result;
         if (!result) {
