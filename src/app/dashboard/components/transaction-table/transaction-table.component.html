@@ -1,0 +1,20 @@
+<table>
+  <thead>
+    <tr>
+      <th ng-if="this.formatDate">Date</th>
+      <th>Source</th>
+      <th>Target</th>
+      <th>Amount [CHF]</th>
+      <th>Balance [CHF]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let t of transactions">
+      <td ng-if="this.formatDate">{{this.formatDate(t.date)}}</td>
+      <td>{{t.from}}</td>
+      <td>{{t.target}}</td>
+      <td>{{t.amount}}</td>
+      <td>{{t.total}}</td>
+    </tr>
+  </tbody>
+</table>

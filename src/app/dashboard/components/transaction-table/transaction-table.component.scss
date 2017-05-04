@@ -1,0 +1,27 @@
+@import 'src/styles.scss';
+
+:host table,
+:host thead,
+:host tbody {
+  width: 100%;
+}
+
+:host table {
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+:host thead > tr {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+:host th,
+:host td {
+  padding: 4px;
+  text-align: center;
+}
+
+:host tr {
+  width: 25%;
+}
