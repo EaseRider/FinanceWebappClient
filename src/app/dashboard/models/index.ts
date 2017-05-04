@@ -1,2 +1,2 @@
-export * from "./transaction"
-export * from "./query-information"
+export * from './transaction-filter.model';
+export * from './transaction.model';
