@@ -1,39 +1,45 @@
 import {NgModule, ModuleWithProviders} from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import {DashboardRoutingModule} from "./dashboard-routing.module";
+import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import {NewPaymentComponent} from "./components/new-payment/new-payment.component";
+import {AllTransactionsComponent} from "./components/all-transactions/all-transactions.component";
+import {LatestTransactionsComponent} from "./components/latest-transactions/latest-transactions.component";
+import {TransactionTableComponent} from "./components/transaction-table/transaction-table.component";
+import {OverviewComponent} from "./components/overview/overview.component";
 
 import {SharedModule} from "../shared/shared.module";
 
-import {DashbaordRoutingModule} from "./dashboard-routing.module";
-import {DashboardComponent} from './components/dashboard.component';
-import {NewPaymentComponent} from './components/new-payment.component';
-import {LatestTransactionsComponent} from './components/latest-transactions.component';
-import {AllTransactionsComponent} from "./components/all-transactions.component";
+import {AccountService} from "./services/account.service";
 import {TransactionService} from "./services/transaction.service";
-import {DashboardResourceService} from "./resources/dashboard-resource.service";
-import {MyCurrencyPipe} from "./pipes/currency.pipe";
 
-import {NgSemanticModule} from "ng-semantic/ng-semantic";
-import { IsAccountDirective } from './services/is-account.directive';
+import {AccountResource} from "./resources/account.resource";
+import {TransactionResource} from "./resources/transaction.resource";
+
+import {AuthGuard} from "../auth/guards/auth.guard";
 
 @NgModule({
   declarations: [
-    // Declarations (Components / Directives) used from/within the Module
     DashboardComponent,
     NewPaymentComponent,
     LatestTransactionsComponent,
     AllTransactionsComponent,
-    MyCurrencyPipe,
-    IsAccountDirective],
+    OverviewComponent,
+    TransactionTableComponent
+  ],
   imports: [
-    // Other Modules to import (imports the exported Components/Directives from the other module)
-    SharedModule, DashbaordRoutingModule,
-    NgSemanticModule
+    SharedModule,
+    DashboardRoutingModule,
+    BrowserAnimationsModule
   ],
-  exports: [
-    // Components/Directives (or even Modules) to export (available for other modules; and forRoot() )
-  ],
+  exports: [],
   providers: [
-    TransactionService, DashboardResourceService
-    // DI Providers (Services, Tokens, Factories...), may be instantiated multiple times
+    AuthGuard,
+    TransactionService,
+    TransactionResource,
+    AccountService,
+    AccountResource
   ]
 })
 export class DashboardModule {
@@ -43,5 +49,4 @@ export class DashboardModule {
       providers: []
     };
   }
-
 }
