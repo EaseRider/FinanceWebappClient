@@ -32,7 +32,6 @@ export class NewPaymentComponent implements OnInit {
               private transactionResource: TransactionResource, private accountResource: AccountResource) {
   }
 
-
   ngOnInit() {
     this.accountService.accountChange.subscribe((target) => {
       this.account = target.toDto();
@@ -66,7 +65,7 @@ export class NewPaymentComponent implements OnInit {
 
   onHandlePayment() {
     this.transactionService.createTransfer(TransactionModel.fromDto({
-      amount: this.transferAmount,
+      amount: parseFloat(this.transferAmount).toFixed(2),
       target: this.targetAccountNr
     }));
   }

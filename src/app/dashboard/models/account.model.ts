@@ -17,7 +17,7 @@ export class AccountModel {
   }
 
   public constructor(amount: number, accountNr: string, name: string,  owner: any, error: string) {
-    this.amount = amount;
+    this.amount = Math.round(amount*100) / 100;
     this.accountNr = accountNr;
     this.name = name;
     this.owner = owner;

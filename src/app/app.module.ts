@@ -12,6 +12,8 @@ import {AppComponent} from "./app.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {AuthModule} from "./auth/auth.module";
 
+import 'hammerjs';
+
 @NgModule({
   declarations: [
     AppComponent

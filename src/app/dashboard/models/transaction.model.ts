@@ -13,11 +13,11 @@ export class TransactionModel {
   }
 
   public constructor(amount: number, date: Date, from: string, target: string,  total: number) {
-    this.amount = amount;
+    this.amount = Math.round(amount*100) / 100;
     this.date = date;
     this.from = from;
     this.target = target;
-    this.total = total;
+    this.total = Math.round(total*100) / 100;
   }
 
   toDto(): any {
