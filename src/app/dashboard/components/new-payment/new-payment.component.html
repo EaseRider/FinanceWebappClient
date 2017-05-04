@@ -1,0 +1,27 @@
+<md-card>
+    <md-card-title>New Payment</md-card-title>
+    <md-card-content>
+        <form (ngSubmit)="onHandlePayment()" #paymentForm="ngForm" autocomplete="off">
+            <md-input-container>
+                <input mdInput placeholder="From" type="text" disabled value="{{account.accountNr + ' [' + account.amount + ']'}}"/>
+            </md-input-container>
+
+            <md-input-container>
+                <input mdInput placeholder="To" type="text" #name="ngModel" ngModel autocomplete="off" name="target" #target [(ngModel)]="targetAccountNr" (keyup)="onHandleTarget(target.value)" ng-model="target"/>
+            </md-input-container>
+            <span class="infoText">{{ messages.receiver }}</span>
+
+            <md-input-container>
+                <input mdInput placeholder="Amount (CHF)" #name="ngModel" autocomplete="off" ngModel name="amount" [(ngModel)]="transferAmount" ng-pattern="/^\d+$/" ng-model=""/>
+            </md-input-container>
+            <span class="infoText">{{ messages.amount }}</span>
+            <br/><br/>
+            <div>
+                <button md-raised-button color="accent">Pay</button>
+                <span class="infoText">{{ messages.payment }}</span>
+            </div>
+        </form>
+    </md-card-content>
+</md-card>
+
+
