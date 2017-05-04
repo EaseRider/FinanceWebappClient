@@ -1,22 +1,21 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {DashboardComponent} from "./components/dashboard.component";
-import {AllTransactionsComponent} from "./components/all-transactions.component";
-import {AuthGuard} from "../auth/services/authguard.service";
-//import {AuthGuard} from "../auth/auth-guard";
+import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import {AllTransactionsComponent} from "./components/all-transactions/all-transactions.component";
+import {OverviewComponent} from "./components/overview/overview.component";
+import {AuthGuard} from "../auth/guards/auth.guard";
 
 const appRoutes: Routes = [
   {
-    path: '',
-    component: DashboardComponent, // TODO: Add initial router outlet dashboard component...
+    path: 'dashboard',
+    component: DashboardComponent,
     children: [
-      // TODO: Add routing path for dashboard here...
+      {path: '', component: OverviewComponent},
+      {path: 'transactions', component: AllTransactionsComponent}
     ],
-  },
-  {path: 'transactions', component: AllTransactionsComponent}
-  //{path: 'dashboard/transactions', component: AllTransactionsComponent}
+    canActivate: [AuthGuard],
+  }
 ];
-
 
 @NgModule({
   imports: [
@@ -24,8 +23,7 @@ const appRoutes: Routes = [
   ],
   exports: [
     RouterModule
-  ],
-  providers: []
+  ]
 })
-export class DashbaordRoutingModule {
+export class DashboardRoutingModule {
 }
