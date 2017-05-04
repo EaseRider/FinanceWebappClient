@@ -1,0 +1,28 @@
+nav {
+  margin: 0 35px 0 50px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  float: left;
+  margin-left:8px;
+}
+
+nav a {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  background:#5c6bc0;
+}
+
+.title {
+  font-size: 30px;
+}
+.fill {
+  flex: 1 1 auto;
+}

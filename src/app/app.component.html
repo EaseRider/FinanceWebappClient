@@ -1,14 +1,15 @@
-<sm-menu class="secondary pointing primary stackable" layout="row">
-  <div class="header item huge label">
-    Finance App
-  </div>
-  <a sm-item *ngFor="let el of navigation | filter : 'main' : currUrl" class="ui item {{currUrl | isactivenav: el.url}}"
-     routerLink="{{el.url}}" href="">{{el.name}}</a>
-  <sm-menu class="menu right secondary">
-    <div class="item">
-      <wed-logout></wed-logout>
-    </div>
-  </sm-menu>
-</sm-menu>
+<md-toolbar color="primary">
+  <span class="title">Bank of Rapperswil</span>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/dashboard/transactions">All Transactions</a></li>
+    </ul>
+  </nav>
+  <span class="fill"></span>
+  <span>
+    <logout-button></logout-button>
+  </span>
+</md-toolbar>
 <router-outlet></router-outlet>
-
